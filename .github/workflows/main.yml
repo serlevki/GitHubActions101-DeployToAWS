@@ -67,7 +67,7 @@ jobs:
                  #--version-label "Ver-${{ github.sha }}" \
                   #--description "CommitSHA-${{ github.sha }}"
   deploy:
-    runs_on: [ubuntu-latest]
+    runs-on: [ubuntu-latest]
     needs  : [my_ci_pipeline, my_cd_pipeline]
     steps:    
             - name: Deploy new version on ELB
