@@ -1,8 +1,8 @@
 name: CI-CD-Pipeline-to-AWS-Elastic-Beanstalk
 env:
   EB_PACKAGE_S3_BUCKET_NAME : "zzz.flask-app" 
-  EB_APPLICATION_NAME       : "MyFlask158" 
-  EB_ENVIRONMENT_NAME       : "Myflask158-env"
+  EB_APPLICATION_NAME       : "MyFlask15" 
+  EB_ENVIRONMENT_NAME       : "Myflask15-env"
   DEPLOY_PACKAGE_NAME       : "flask-app-${{github.sha}}.zip" 
   AWS_REGION_NAME           : "us-west-2"
 
@@ -59,6 +59,7 @@ jobs:
                 --source-bundle S3Bucket="${{ env.EB_PACKAGE_S3_BUCKET_NAME }}",S3Key="${{ env.DEPLOY_PACKAGE_NAME }}" \
                 --version-label "Ver-${{ github.sha }}" \
                 --description "CommitSHA-${{ github.sha }}"
+                --auto-create-application
             
             - name: Deploy new version on ELB
               run : aws elasticbeanstalk update-environment --environment-name ${{ env.EB_ENVIRONMENT_NAME }} --version-label "Ver-${{ github.sha }}"
