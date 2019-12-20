@@ -40,10 +40,10 @@ jobs:
     needs  : [my_ci_pipeline]
     steps  :
             
-            - name:
+            - name: Update aws cli
               run: 
                 pip3 install --upgrade --user awscli
-                export PATH=/home/ec2-user/.local/bin:$PATH
+                
             - name: Configure AWS cred 
               uses: aws-actions/configure-aws-credentials@v1
               with:
