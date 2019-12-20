@@ -1,7 +1,7 @@
 name: CI-CD-Pipeline-to-AWS-Elastic-Beanstalk
 env:
   EB_PACKAGE_S3_BUCKET_NAME : "zzz.flask-app" 
-  EB_APPLICATION_NAME       : "MyFlask" 
+  EB_APPLICATION_NAME       : "MyFlask158" 
   EB_ENVIRONMENT_NAME       : "Myflask-env"
   DEPLOY_PACKAGE_NAME       : "flask-app-${{github.sha}}.zip" 
   AWS_REGION_NAME           : "us-west-2"
@@ -38,12 +38,13 @@ jobs:
   my_cd_pipeline:
     runs-on: [ubuntu-latest]
     needs  : [my_ci_pipeline]
-    steps  :
+    steps  :   
             
-            - name: Update aws cli
+            - name: Install ELB
               run: 
-                pip3 install --upgrade --user awscli
-                
+                git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
+                ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
+                                
             - name: Configure AWS cred 
               uses: aws-actions/configure-aws-credentials@v1
               with:
